@@ -12,7 +12,7 @@ public class TextEditor {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-            
+            TextEditorGUI texteditor = new TextEditorGUI();
     }
     
 }
