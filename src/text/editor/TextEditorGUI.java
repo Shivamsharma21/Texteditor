@@ -5,6 +5,8 @@
  */
 package text.editor;
 
+import java.awt.FileDialog;
+import java.io.*;
 /**
  *
  * @author shivam
@@ -156,6 +158,26 @@ public class TextEditorGUI extends javax.swing.JFrame {
 
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
         // TODO add your handling code here:
+        String filename =null;
+                FileDialog fd = new FileDialog(TextEditorGUI.this,"Open file",FileDialog.LOAD);
+                fd.setVisible(true);
+               if(fd.getFile() != null){
+               filename = fd.getDirectory() + fd.getFile();
+               setTitle(filename);
+               }
+               try{
+                   BufferedReader br = new BufferedReader(new FileReader(filename));
+                   StringBuilder Sb = new StringBuilder();
+                   
+                   String Line =null;
+                   
+                   while( (Line = br.readLine()) != null){
+                       Sb.append(Line + "\n");
+                       textarea.setText(Sb.toString());
+                   }
+               }
+               catch(IOException e){
+               }
     }//GEN-LAST:event_openFileActionPerformed
 
     private void newFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFileActionPerformed
