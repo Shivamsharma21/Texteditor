@@ -12,7 +12,7 @@ import java.io.*;
  * @author shivam
  */
 public class TextEditorGUI extends javax.swing.JFrame {
-
+    String filename =null;
     /**
      * Creates new form TextEditorGUI
      */
@@ -158,7 +158,7 @@ public class TextEditorGUI extends javax.swing.JFrame {
 
     private void openFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileActionPerformed
         // TODO add your handling code here:
-        String filename =null;
+        
                 FileDialog fd = new FileDialog(TextEditorGUI.this,"Open file",FileDialog.LOAD);
                 fd.setVisible(true);
                if(fd.getFile() != null){
@@ -188,6 +188,20 @@ public class TextEditorGUI extends javax.swing.JFrame {
 
     private void saveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileActionPerformed
         // TODO add your handling code here:
+        FileDialog filedialog = new FileDialog(TextEditorGUI.this,"Saving the file",FileDialog.SAVE);
+        filedialog.setVisible(true);
+        
+        if(filedialog.getFile() != null){
+            filename  = filedialog.getDirectory() + filedialog.getFile();
+                filedialog.setTitle(filename);
+                try{
+                FileWriter fw = new FileWriter(filename);
+                    fw.write(textarea.getText());
+                     setTitle(filename); 
+                    fw.close();
+                }catch(Exception e){
+                }
+        }
     }//GEN-LAST:event_saveFileActionPerformed
 
     private void CutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CutActionPerformed
