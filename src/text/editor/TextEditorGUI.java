@@ -7,12 +7,18 @@ package text.editor;
 
 import java.awt.FileDialog;
 import java.io.*;
+import java.lang.*;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 /**
  *
  * @author shivam
  */
 public class TextEditorGUI extends javax.swing.JFrame {
     String filename =null;
+    Clipboard clipboard = getToolkit().getSystemClipboard();
+    
     /**
      * Creates new form TextEditorGUI
      */
@@ -206,6 +212,10 @@ public class TextEditorGUI extends javax.swing.JFrame {
 
     private void CutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CutActionPerformed
         // TODO add your handling code here:
+        String cutstring = textarea.getSelectedText();
+        StringSelection cutselection = new StringSelection(cutstring);
+        clipboard.setContents(cutselection, cutselection);
+        textarea.replaceRange("",textarea.getSelectionStart(), textarea.getSelectionEnd());
     }//GEN-LAST:event_CutActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
