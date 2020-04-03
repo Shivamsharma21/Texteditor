@@ -10,7 +10,10 @@ import java.io.*;
 import java.lang.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+
 /**
  *
  * @author shivam
@@ -224,10 +227,19 @@ public class TextEditorGUI extends javax.swing.JFrame {
 
     private void copyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyActionPerformed
         // TODO add your handling code here:
+        String copy = textarea.getSelectedText();
+        StringSelection copyselection = new StringSelection(copy);
+        clipboard.setContents(copyselection, copyselection);
     }//GEN-LAST:event_copyActionPerformed
 
     private void pasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteActionPerformed
         // TODO add your handling code here:
+        try{
+            Transferable paste = clipboard.getContents(TextEditorGUI.this);
+            String sel = (String)paste.getTransferData(DataFlavor.stringFlavor);
+            textarea.replaceRange(sel, textarea.getSelectionStart(), textarea.getSelectionEnd());
+        }catch(Exception e){
+        }  
     }//GEN-LAST:event_pasteActionPerformed
 
     /**
